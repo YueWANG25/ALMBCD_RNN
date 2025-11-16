@@ -10,9 +10,8 @@ This package is based on the paper:
 
 > **Title:** An Augmented Lagrangian Method for Training Recurrent Neural Networks  
 > **Authors:** Yue Wang, Chao Zhang, Xiaojun Chen  
-> **Year:** 2024  
-> **arXiv ID:** [2402.13687](https://arxiv.org/abs/2402.13687)  
-> **DOI:** [10.48550/arXiv.2402.13687](https://doi.org/10.48550/arXiv.2402.13687)
+> **Publication:** [Y. Wang, C. Zhang and X. Chen, *An Augmented Lagrangian Method for Training Recurrent Neural Networks*, SIAM Journal on Scientific Computing, 47 (2025), C22-C51.](https://epubs.siam.org/doi/abs/10.1137/23M1627614) 
+
 > 
 > **Abstract.** Recurrent Neural Networks (RNNs) are widely used to model sequential data in a wide range of areas, such as natural language processing, speech recognition, machine translation, and time series analysis. In this paper, we model the training process of RNNs with the ReLU activation function as a constrained optimization problem with a smooth nonconvex objective function and piecewise smooth nonconvex constraints. We prove that any feasible point of the optimization problem satisfies the no nonzero abnormal multiplier constraint qualification (NNAMCQ), and any local minimizer is a Karush-Kuhn-Tucker  (KKT) point of the problem. Moreover, we propose an augmented Lagrangian method (ALM) and design an efficient block coordinate descent (BCD) method to solve the subproblems of the ALM.
 The update of each block of the BCD method has a closed-form solution. The stop criterion for the inner loop is easy to check and can be stopped in finite steps. Moreover, we show that the BCD method can generate a directional stationary point of the subproblem. Furthermore, we establish the global convergence of the ALM to a KKT point of the constrained optimization problem. Compared with the state-of-the-art algorithms, numerical results demonstrate the efficiency and effectiveness of the ALM for training RNNs.
@@ -104,6 +103,7 @@ To see an example of how to use the functions in this package, you can refer to 
 python main.py
 ```
 The script will load the specified dataset, perform the optimization, and output the results.
+
 
 
 
