@@ -10,7 +10,7 @@ from gen_synthetic_dataset import generate_synthetic_dataset
 
 
 def load_dataset(dataset_name):
-    dataset_ori = pd.read_csv(dataset_name + '.csv', header=0, index_col=0)
+    dataset_ori = pd.read_csv(dataset_name + '.csv', header=None, index_col=None)
     return dataset_ori
 
 
@@ -22,10 +22,10 @@ def split_dataset(dataset_ori, Ny, sizerate_training=0.9):
     T_test = dataset_length - T
 
     x_trainset = dataset_ori.iloc[:train_length, :Nx].to_numpy()
-    y_trainset = dataset_ori.iloc[:train_length, :Ny].to_numpy()
+    y_trainset = dataset_ori.iloc[:train_length, Nx+1:].to_numpy()
 
     x_testset = dataset_ori.iloc[train_length:, :Nx].to_numpy()
-    y_testset = dataset_ori.iloc[train_length:, :Ny].to_numpy()
+    y_testset = dataset_ori.iloc[train_length:, Nx+1:].to_numpy()
 
     return x_trainset, y_trainset, x_testset, y_testset, T, T_test, Nx
 
@@ -376,8 +376,11 @@ def alm_bcd_ReLU_optimization(dataset_name,
                     A_kj, W_kj, V_kj, b_kj, c_kj = A_km1, W_km1, V_km1, b_km1, c_km1
                     zin_kj, zout_kj, h_kj, u_kj, ht_kj, ut_kj = zin_km1, zout_km1, h_bar, u_bar, ht_bar, ut_bar
                 else:
-                    A_kj, W_kj, V_kj, b_kj, c_kj = A0, W0, V0, b0, c0
-                    zin_kj, zout_kj, h_kj, u_kj, ht_kj, ut_kj = zin_0, zout_0, h0, u0, ht0, ut0
+                    A_kj, W_kj, V_kj, b_kj, c_kj = variables["A0"], variables[
+                        "W0"], variables["V0"], variables["b0"], variables["c0"]
+                    zin_kj, zout_kj, h_kj, u_kj, ht_kj, ut_kj = variables[
+                        "zin_0"], variables["zout_0"], variables["h0"], variables[
+                            "u0"], variables["ht0"], variables["ut0"]
 
         # Begin inner loop: BCD
         for j in range(params["submaxiter"]):
@@ -565,3 +568,4 @@ def alm_bcd_ReLU_optimization(dataset_name,
         print(f"{'-' * 40}\n")
 
     return results
+
